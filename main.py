@@ -169,7 +169,7 @@ def process_table(table, semestr, contract):
                 my_dict[headers[index]] = previous_dict[headers[index]]
             else:
                 my_dict[headers[index]] = item
-        my_dict["Семестр"] = str(semestr)
+        my_dict['Семестр'] = str(semestr)
         if contract == "к":
             my_dict["Контракт"] = "Контракт"
         else:
@@ -209,7 +209,7 @@ async def start_parsing(update, context):
             sem = [int(s) for s, _ in pairs]
             letters = [letter for _, letter in pairs]
         else:
-            sem = [1, 2, 1, 2]
+            sem = [1, 1, 2, 2]
             letters = ['б', 'к', 'б', 'к']
 
         print("Основной текст:", pib)
@@ -255,7 +255,7 @@ async def start_parsing(update, context):
                 break
 
     excel_path = 'Example.xlsx'
-    copy_path = directory + new_name + '.xlsx'
+    copy_path = directory + pib.replace(" ", "") + new_name + '.xlsx'
 
     shutil.copy(excel_path, copy_path)
     wb = openpyxl.load_workbook(copy_path)
