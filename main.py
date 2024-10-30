@@ -1,3 +1,4 @@
+import os
 import re
 
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
@@ -57,7 +58,7 @@ async def parse_pdf(update, context):
 
 
 def main() -> None:
-    bot_token = '7554471229:AAGUNZOQpIdvCZ35DtfhfEW5rVu_OEHGdEw'  # os.getenv('BOT_TOKEN')
+    bot_token = os.getenv('BOT_TOKEN')
     application = Application.builder().token(bot_token).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))

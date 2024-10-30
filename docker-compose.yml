@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  parser:
+    image: halushko/ist_teacher_workload:latest
+    environment:
+      BOT_TOKEN: <input bot token here>
+    restart: always
+    container_name: "ist_teacher_workload"
