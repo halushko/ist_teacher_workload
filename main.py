@@ -1,9 +1,9 @@
+import re
 import pdfplumber
 import openpyxl
 import shutil
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import os
-import datetime
 import random
 import requests
 
@@ -99,24 +99,24 @@ def fill_xlsx_second_page(sheet, predmety_complex, letters):
         if key == 'ДЕК':
             set_value(sheet[f"{letters[0]}24"], entry['ДЕК.бб.кільк'])
             set_value(sheet[f"{letters[1]}24"], entry['ДЕК.бк.кільк'])
-            # set_value(sheet[f"{letters[2]}24"], entry['ДЕК.бб'])
-            # set_value(sheet[f"{letters[3]}24"], entry['ДЕК.бк'])
+            set_value(sheet[f"{letters[2]}24"], entry['ДЕК.бб'])
+            set_value(sheet[f"{letters[3]}24"], entry['ДЕК.бк'])
             if not entry['ДЕК.бб.кільк'] + entry['ДЕК.бк.кільк'] == "":
                 set_value(sheet[f"{letters[4]}24"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}24"], entry['Шифр груп'])
                 set_value(sheet[f"{letters[6]}24"], entry['Курс'])
             set_value(sheet[f"{letters[0]}27"], entry['ДЕК.мпб.кільк'])
             set_value(sheet[f"{letters[1]}27"], entry['ДЕК.мпк.кільк'])
-            # set_value(sheet[f"{letters[2]}27"], entry['ДЕК.мпб'])
-            # set_value(sheet[f"{letters[3]}27"], entry['ДЕК.мпк'])
+            set_value(sheet[f"{letters[2]}27"], entry['ДЕК.мпб'])
+            set_value(sheet[f"{letters[3]}27"], entry['ДЕК.мпк'])
             if not entry['ДЕК.мпб.кільк'] + entry['ДЕК.мпк.кільк'] == "":
                 set_value(sheet[f"{letters[4]}27"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}27"], entry['Шифр груп'])
                 set_value(sheet[f"{letters[6]}27"], entry['Курс'])
             set_value(sheet[f"{letters[0]}29"], entry['ДЕК.мнб.кільк'])
             set_value(sheet[f"{letters[1]}29"], entry['ДЕК.мнк.кільк'])
-            # set_value(sheet[f"{letters[2]}29"], entry['ДЕК.мнб'])
-            # set_value(sheet[f"{letters[3]}29"], entry['ДЕК.мнк'])
+            set_value(sheet[f"{letters[2]}29"], entry['ДЕК.мнб'])
+            set_value(sheet[f"{letters[3]}29"], entry['ДЕК.мнк'])
             if not entry['ДЕК.мнб.кільк'] + entry['ДЕК.мнк.кільк'] == "":
                 set_value(sheet[f"{letters[4]}29"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}29"], entry['Шифр груп'])
@@ -124,8 +124,8 @@ def fill_xlsx_second_page(sheet, predmety_complex, letters):
         elif key == 'БАК':
             set_value(sheet[f"{letters[0]}13"], entry['кількість студ.б'])
             set_value(sheet[f"{letters[1]}13"], entry['кількість студ.к'])
-            # set_value(sheet[f"{letters[2]}13"], entry['Керівництво.бб'])
-            # set_value(sheet[f"{letters[3]}13"], entry['Керівництво.бк'])
+            set_value(sheet[f"{letters[2]}13"], entry['Керівництво.бб'])
+            set_value(sheet[f"{letters[3]}13"], entry['Керівництво.бк'])
             if not entry['кількість студ.б'] + entry['кількість студ.к'] == "":
                 set_value(sheet[f"{letters[4]}13"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}13"], entry['Шифр груп'])
@@ -133,8 +133,8 @@ def fill_xlsx_second_page(sheet, predmety_complex, letters):
         elif key == 'МагМП':
             set_value(sheet[f"{letters[0]}14"], entry['кількість студ.б'])
             set_value(sheet[f"{letters[1]}14"], entry['кількість студ.к'])
-            # set_value(sheet[f"{letters[2]}14"], entry['Керівництво.мпб'])
-            # set_value(sheet[f"{letters[3]}14"], entry['Керівництво.мпк'])
+            set_value(sheet[f"{letters[2]}14"], entry['Керівництво.мпб'])
+            set_value(sheet[f"{letters[3]}14"], entry['Керівництво.мпк'])
             if not entry['кількість студ.б'] + entry['кількість студ.к'] == "":
                 set_value(sheet[f"{letters[4]}14"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}14"], entry['Шифр груп'])
@@ -142,8 +142,8 @@ def fill_xlsx_second_page(sheet, predmety_complex, letters):
         elif key == 'МагМН':
             set_value(sheet[f"{letters[0]}15"], entry['кількість студ.б'])
             set_value(sheet[f"{letters[1]}15"], entry['кількість студ.к'])
-            # set_value(sheet[f"{letters[2]}15"], entry['Керівництво.мнб'])
-            # set_value(sheet[f"{letters[3]}15"], entry['Керівництво.мнк'])
+            set_value(sheet[f"{letters[2]}15"], entry['Керівництво.мнб'])
+            set_value(sheet[f"{letters[3]}15"], entry['Керівництво.мнк'])
             if not entry['кількість студ.б'] + entry['кількість студ.к'] == "":
                 set_value(sheet[f"{letters[4]}15"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}15"], entry['Шифр груп'])
@@ -151,15 +151,15 @@ def fill_xlsx_second_page(sheet, predmety_complex, letters):
         elif key == 'Аспірант':
             set_value(sheet[f"{letters[0]}30"], entry['кількість студ.б'])
             set_value(sheet[f"{letters[1]}30"], entry['кількість студ.к'])
-            # set_value(sheet[f"{letters[2]}30"], entry['Керівництво.аб'])
-            # set_value(sheet[f"{letters[3]}30"], entry['Керівництво.ак'])
+            set_value(sheet[f"{letters[2]}30"], entry['Керівництво.аб'])
+            set_value(sheet[f"{letters[3]}30"], entry['Керівництво.ак'])
             if not entry['кількість студ.б'] + entry['кількість студ.к'] == "":
                 set_value(sheet[f"{letters[4]}30"], entry['Факультет'])
                 set_value(sheet[f"{letters[5]}30"], entry['Шифр груп'])
                 set_value(sheet[f"{letters[6]}30"], entry['Курс'])
 
 
-def process_table(table, semestr):
+def process_table(table, semestr, contract):
     result = []
     previous_dict = {}
     for _, row in enumerate(table):
@@ -169,12 +169,8 @@ def process_table(table, semestr):
                 my_dict[headers[index]] = previous_dict[headers[index]]
             else:
                 my_dict[headers[index]] = item
-        if semestr < 3:
-            my_dict["Семестр"] = "1"
-        else:
-            my_dict["Семестр"] = "2"
-
-        if semestr % 2 == 0:
+        my_dict["Семестр"] = str(semestr)
+        if contract == "к":
             my_dict["Контракт"] = "Контракт"
         else:
             my_dict["Контракт"] = "Бюджет"
@@ -199,9 +195,28 @@ def rename_files_with_random_hex(file):
 async def start_parsing(update, context):
     message = update.message
     file_id = message.document.file_id
-    pib = message.caption
-    today = datetime.datetime.today()
-    # date_str = today.strftime('%Y_%m_%d_') + str(today.hour) + "_" + str(today.minute) + "_" + str(today.second)
+    print("Шукаю для ПІБ " + message.caption + " (" + str(update.effective_chat.id) + ")")
+
+    pib = ""
+    match = re.search(r"^(.*?)(?: \(([\dкб,]+)\))?$", message.caption)
+    numbers, letters, sem = [], [], []
+
+    if match:
+        pib = match.group(1).strip()  # Основной текст
+
+        if match.group(2):
+            pairs = re.findall(r"(\d)([кб])", match.group(2))
+            sem = [int(s) for s, _ in pairs]
+            letters = [letter for _, letter in pairs]
+        else:
+            sem = [1, 2, 1, 2]
+            letters = ['б', 'к', 'б', 'к']
+
+        print("Основной текст:", pib)
+        print("Числа:", sem)
+        print("Буквы:", letters)
+    else:
+        print("Строка не соответствует ожидаемому формату.")
 
     file = await context.bot.get_file(file_id)
     file_name = message.document.file_name
@@ -213,6 +228,10 @@ async def start_parsing(update, context):
         with open(pdf_file_path, "wb") as f:
             f.write(response.content)
     else:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text="Не вдалося завантажити файл PDF, прикладіть до повідомлення файл з навантаженнями"
+        )
         return
 
     new_name, pdf_path = rename_files_with_random_hex(pdf_file_path)
@@ -223,9 +242,15 @@ async def start_parsing(update, context):
             page_text = page.extract_text()
             if pib in page_text:
                 tables = page.extract_tables()
+                if len(tables) - 2 != len(sem):
+                    await context.bot.send_message(
+                        chat_id=update.effective_chat.id,
+                        text="У Вашому навантаженні відсутня частина інформації. Вкажіть які семестри відсутні, надіславши нове виправлене повідомлення з текстом:\n\n" + pib + " (1б,1к,2б,2к)\n\nВидаліть з цього тексту в скобках те навантажження, яке відсутнє. Цифра - номер семестру, літера - контракт, чи бюджет"
+                    )
+                    return
                 if tables:
-                    for i in [1, 2, 3, 4]:
-                        res = process_table(tables[i], i)
+                    for i, _ in enumerate(sem):
+                        res = process_table(tables[i + 1], sem[i], letters[i])
                         predmety.extend(res)
                 break
 
@@ -424,14 +449,15 @@ async def start_parsing(update, context):
         caption="Результат обробки PDF"
     )
 
+
 async def start(update, context):
     await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text="Привіт, я вмію парсити PDF з навантаженням! Просто скинь мені PDF з навантеженнями, вкажи свої ПІБ і я згенерую тобі Excel")
+                                   text="Привіт, я вмію парсити PDF з навантаженням! Просто скиньте мені PDF з навантеженнями, вкажыть свої ПІБ і я згенерую Вам Excel")
 
 
 async def echo(update, context):
     await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text="Просто скинь мені PDF з навантеженнями, вкажи свої ПІБ і я згенерую тобі Excel")
+                                   text="Просто скиньте мені PDF з навантеженнями, вкажыть свої ПІБ і я згенерую Вам Excel")
 
 
 async def parse_pdf(update, context):
@@ -439,7 +465,7 @@ async def parse_pdf(update, context):
 
 
 def main() -> None:
-    bot_token = os.getenv('BOT_TOKEN')
+    bot_token = '7554471229:AAGUNZOQpIdvCZ35DtfhfEW5rVu_OEHGdEw'  # os.getenv('BOT_TOKEN')
     application = Application.builder().token(bot_token).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
