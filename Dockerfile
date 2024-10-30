@@ -1,9 +1,10 @@
 FROM python:3.9-slim
 
-RUN mkdir /app/files
-RUN mkdir /app/libs
+WORKDIR /app
+RUN mkdir ./files
+RUN mkdir ./libs
 
-COPY . /app
+COPY . .
 
 RUN pip install python-telegram-bot openpyxl pdfplumber requests
 
