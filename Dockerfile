@@ -5,8 +5,7 @@ RUN apt-get update && apt-get install -y \
     cargo \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install python-telegram-bot openpyxl pdfplumber requests && \
-    pip list
+RUN pip install python-telegram-bot openpyxl pdfplumber requests
 
 WORKDIR /app
 RUN mkdir ./files
