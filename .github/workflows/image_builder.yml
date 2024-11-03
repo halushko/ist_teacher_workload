@@ -38,3 +38,4 @@ jobs:
           builder: mybuilder
           platforms: linux/amd64, linux/arm64, linux/arm/v7
           tags: halushko/ist_teacher_workload:latest
+          build-args: --no-cache
