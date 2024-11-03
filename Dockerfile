@@ -1,24 +1,22 @@
-FROM python:3.10-slim
+# Используем Rust как базовый образ
+FROM rust:latest
 
+# Устанавливаем Python и другие необходимые инструменты
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
     build-essential \
-    curl \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --upgrade pip
+    && rm -rf /var/lib/apt/lists/*
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-    export PATH="$HOME/.cargo/bin:$PATH" && \
-    rustup update stable && \
-    rustup default stable
+# Установка Python-зависимостей
+RUN pip3 install --prefer-binary python-telegram-bot openpyxl pdfplumber requests
 
-ENV PATH="/root/.cargo/bin:${PATH}"
-
-RUN pip install --prefer-binary python-telegram-bot openpyxl "pdfplumber" "requests" "cryptography<41.0.0"
-
+# Создаем рабочую директорию и копируем файлы
 WORKDIR /app
 RUN mkdir ./files
 RUN mkdir ./libs
 
 COPY . .
 
-CMD ["python", "main.py"]
+# Запускаем приложение
+CMD ["python3", "main.py"]
