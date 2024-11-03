@@ -1,22 +1,16 @@
-# Используем Rust как базовый образ
-FROM rust:latest
+FROM python:3.10-slim
 
-# Устанавливаем Python и другие необходимые инструменты
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    cargo \
+    && rm -rf /var/lib/apt/lists/* \
 
-# Установка Python-зависимостей
-RUN pip3 install --prefer-binary python-telegram-bot openpyxl pdfplumber requests
+RUN pip install python-telegram-bot openpyxl pdfplumber requests
 
-# Создаем рабочую директорию и копируем файлы
 WORKDIR /app
 RUN mkdir ./files
 RUN mkdir ./libs
 
 COPY . .
 
-# Запускаем приложение
-CMD ["python3", "main.py"]
+CMD ["python", "main.py"]

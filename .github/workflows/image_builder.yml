@@ -36,5 +36,5 @@ jobs:
           file: ./Dockerfile
           push: true
           builder: mybuilder
-          platforms: linux/amd64, linux/arm64, linux/386, linux/arm/v7, linux/arm/v6
+          platforms: linux/amd64, linux/arm64, linux/arm/v7
           tags: halushko/ist_teacher_workload:latest
