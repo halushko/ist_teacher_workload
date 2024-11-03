@@ -8,7 +8,8 @@ RUN apk update && apk add --no-cache \
     openssl-dev \
     cargo \
     gcc \
-    musl-dev
+    musl-dev \
+    python3-dev
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir \
@@ -19,8 +20,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
     'cryptography>=36.0.0'
 
 WORKDIR /app
-RUN mkdir ./files ./libs
 COPY . .
 
-# Запуск основного приложения
 CMD ["python3", "main.py"]
