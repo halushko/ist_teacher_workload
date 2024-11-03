@@ -13,7 +13,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN pip install python-telegram-bot openpyxl pdfplumber requests
+RUN pip install --prefer-binary python-telegram-bot openpyxl "pdfplumber" "requests" "cryptography<41.0.0"
 
 WORKDIR /app
 RUN mkdir ./files
