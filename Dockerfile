@@ -7,12 +7,13 @@ RUN apt-get update && apt-get install -y \
     && pip install --upgrade pip
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-    . "$HOME/.cargo/env" && \
+    export PATH="$HOME/.cargo/bin:$PATH" && \
     rustup update stable && \
     rustup default stable
 
-RUN . "$HOME/.cargo/env" && \
-    pip install python-telegram-bot openpyxl pdfplumber requests
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN pip install python-telegram-bot openpyxl pdfplumber requests
 
 WORKDIR /app
 RUN mkdir ./files
