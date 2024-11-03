@@ -1,14 +1,18 @@
-FROM python:3.10-slim
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libffi-dev \
-    && rm -rf /var/lib/apt/lists/*
+FROM python:3.10-alpine
 
-RUN pip install --prefer-binary 'cryptography<41.0.0' python-telegram-bot openpyxl pdfplumber requests
+RUN apk update && apk add --no-cache \
+    build-base \
+    libffi-dev \
+    openssl-dev \
+    cargo \
+    gcc \
+    musl-dev \
+    python3-dev
+
+RUN pip install --no-cache-dir --prefer-binary 'cryptography<41.0.0' python-telegram-bot openpyxl pdfplumber requests
 
 WORKDIR /app
-RUN mkdir ./files
-RUN mkdir ./libs
+RUN mkdir ./files ./libs
 
 COPY . .
 
